@@ -1,17 +1,12 @@
-import { AppBar, Toolbar, Typography } from '@mui/material';
+'use client';
 
-const Home = () => {
+import { withHome } from './home/context';
+import HomeDesktop from './home/home-desktop';
+
+export const Home = () => {
   return (
-    <main>
-      <AppBar>
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Drink.it
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </main>
+    <HomeDesktop />
   )
 }
 
-export default Home;
+export default withHome(Home);

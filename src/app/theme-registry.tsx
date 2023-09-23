@@ -6,6 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { FC, useState } from 'react';
 import theme from '../shared/theme';
+import ApolloProvider from './apollo-provider';
 
 const ThemeRegistry: FC<{
   options: {
@@ -62,7 +63,9 @@ const ThemeRegistry: FC<{
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        {children}
+        <ApolloProvider>
+          {children}
+        </ApolloProvider>
       </ThemeProvider>
     </CacheProvider>
   );
