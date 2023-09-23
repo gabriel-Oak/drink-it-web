@@ -26,6 +26,7 @@ const useHomeController = (): HomeContextProps => {
   const getCocktails = (query: SearchType) => {
     setSearch(query);
     cocktails.fetchMore({ variables: { query } });
+    setDrawer(false);
 
     setQueryParams({
       type: Object.keys(query)[0],
