@@ -3,7 +3,7 @@
 import { withHome } from './home/context';
 import HomeDesktop from './home/home-desktop';
 
-export const Home = () => {
+const Home = () => {
   return (
     <HomeDesktop />
   )
