@@ -1,11 +1,16 @@
 import { ApolloError } from "@apollo/client";
-import { Card, CardContent, Typography, styled } from "@mui/material";
+import { Button, Card, CardContent, Typography, styled } from "@mui/material";
 import { themeConfigs } from "../../../../shared/theme";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const Root = styled('aside')`
+interface RootProps {
+  isUpMd: boolean;
+}
+
+export const Root = styled('aside') <RootProps>`
   flex: 1;
   row-gap: 16px;
-  max-width: 290px;
+  ${({ isUpMd }) => isUpMd && 'max-width: 290px;'}
   display: flex;
   flex-direction: column;
 `;
@@ -17,7 +22,7 @@ interface DiscoveryProps {
 
 export const Discovery = styled(Card) <DiscoveryProps>`
   border-radius: 16px;
-  cursor: ${({ loading, error }) => (loading || !!error ? 'default' : 'pointer')};;
+  cursor: ${({ loading, error }) => (loading || !!error ? 'default' : 'pointer')};
 `;
 
 export const FilterCard = styled(Card)`
@@ -36,30 +41,64 @@ export const ButtonsContainer = styled(CardContent)`
   row-gap: 8px;
 `;
 
-export interface ButtonCardProps {
+interface ButtonCardProps {
   isActive?: boolean;
+  isLoading?: boolean;
 }
 
 export const ButtonCard = styled(Card) <ButtonCardProps>`
   display: flex;
   flex-direction: column;
-  column-gap: 10;
   justify-content: flex-end;
   align-items: center;
-  color: ${themeConfigs.palette.primary.main};
+  padding-top: 8px;
+  row-gap: 8px;
+  ${({ isLoading }) => isLoading && 'background-color: var(--grey-300);'}
+  color: ${({ isLoading }) => isLoading
+    ? themeConfigs.palette.primary[200]
+    : themeConfigs.palette.primary.main};
+  
 
-  ${({ isActive }) => isActive ? `
+  ${({ isActive, isLoading }) => isActive ? `
     background-color: ${themeConfigs.palette.primary.main};
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     color: white;
+    cursor: ${isLoading ? 'progress' : 'default'};
   ` : `
     box-shadow: none;
     border: 1px solid rgba(0,0,0,.12);
-    cursor: pointer;
+    ${isLoading ? 'cursor: not-allowed;' : 'cursor: pointer;'}
     
     &:hover {
-      box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+      box-shadow: ${!isLoading && '0px 2px 2px 0px rgba(0, 0, 0, 0.25)'};
     }
   `}
-
 `
+
+export const Icon = styled(FontAwesomeIcon) <ButtonCardProps>`
+  max-height: 44px;
+  max-width: 44px;
+  width: auto;
+  height: auto;
+  color: ${({ isActive, isLoading }) => isActive
+    ? 'white'
+    : isLoading
+      ? themeConfigs.palette.primary[200]
+      : themeConfigs.palette.primary.main};
+`;
+
+export const Label = styled(Typography)`
+  width: 100%;
+  text-wrap: nowrap;
+  overflow: hidden;
+  padding: 0 8px;
+  text-overflow: ellipsis;
+  text-align: center;
+`
+
+export const FloatingButton = styled(Button)`
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+`;

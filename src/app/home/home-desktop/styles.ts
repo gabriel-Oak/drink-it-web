@@ -1,11 +1,25 @@
 import { styled } from '@mui/material';
 
-export const Root = styled('main')`
+interface RootProps {
+  drawer: boolean;
+}
+
+export const Root = styled('main') <RootProps>`
   padding-top: 96px;
+  padding-bottom: 40px;
+  ${({ drawer }) => drawer && `
+    max-height: 100vh;
+    overflow: hidden;
+  `}
 `;
-export const Section = styled('section')`
+
+interface SectionProps {
+  isUpMd: boolean;
+}
+
+export const Section = styled('section') <SectionProps>`
   margin: auto;
   display: flex;
-  flex-direction: row;
-  column-gap: 16px;
+  flex-direction: ${({ isUpMd }) => isUpMd ? 'row' : 'column'};
+  ${({ isUpMd }) => isUpMd ? 'column-gap: 16px;' : 'row-gap: 16px;'};
 `;

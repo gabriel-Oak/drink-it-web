@@ -2,12 +2,11 @@ import { FC } from 'react';
 import { CardContent, CardMedia, Skeleton, Typography } from '@mui/material';
 import { Discovery } from './styles';
 import { useHome } from '../../context';
-import disconnectedImage from '../../../../../public/img/disconnected.jpeg';
 import getApolloError from '../../../../shared/utils/get-apollo-error';
 
 const DiscoveryCard: FC = () => {
   const { randomCocktail: { data, loading, error } } = useHome();
-  console.log({ ...error })
+
   return (
     <Discovery
       loading={loading}
@@ -21,7 +20,7 @@ const DiscoveryCard: FC = () => {
         {loading ? (
           <Skeleton width={120} />
         ) : (
-          <Typography variant="body2">
+          <Typography variant="body2" fontWeight={500}>
             {error ? 'Couldn\'t find a cocktail' : data?.name}
           </Typography>
         )}

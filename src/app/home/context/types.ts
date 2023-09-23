@@ -1,7 +1,6 @@
-import { ApolloError } from "@apollo/client";
-import { ApolloResult } from "../../../shared/types/apollo";
+import { ApolloResult } from '../../../shared/types/apollo';
 
-export type SearchType = { i: string } | { q: string } | { a: string } | { c: string };
+export interface SearchType { [key: string]: string };
 
 export interface HomeCocktail {
   id: string;
@@ -20,5 +19,7 @@ export interface HomeContextProps {
   search: SearchType;
   cocktails: ApolloResult<HomeCocktail[]>;
   randomCocktail: ApolloResult<HomeCocktail>;
+  drawer: boolean,
+  setDrawer: (drawer: boolean) => void,
   getCocktails: (query: SearchType) => void;
 }
