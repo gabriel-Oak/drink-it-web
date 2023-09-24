@@ -1,4 +1,5 @@
 import { Card, Typography, styled } from '@mui/material';
+import Link from 'next/link';
 
 export const Root = styled('article')`
   flex: 1;
@@ -29,4 +30,8 @@ export const CardText = styled(Typography)`
 
 export const ErrorCocktails = styled(Typography)`
   flex: 1;
+`;
+
+export const CocktailLink = styled(Link)`
+  display: contents;
 `;

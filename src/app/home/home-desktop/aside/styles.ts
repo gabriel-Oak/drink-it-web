@@ -3,11 +3,19 @@ import { Button, Card, CardContent, Typography, styled } from "@mui/material";
 import { themeConfigs } from "../../../../shared/theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+const shouldForwardProp = (prop: string) => ![
+  'isActive',
+  'isLoading',
+  'isUpMd',
+  'loading',
+  'error'
+].includes(prop)
+
 interface RootProps {
   isUpMd: boolean;
 }
 
-export const Root = styled('aside') <RootProps>`
+export const Root = styled('aside', { shouldForwardProp }) <RootProps>`
   flex: 1;
   row-gap: 16px;
   ${({ isUpMd }) => isUpMd && 'max-width: 290px;'}
@@ -20,7 +28,7 @@ interface DiscoveryProps {
   error?: ApolloError
 };
 
-export const Discovery = styled(Card) <DiscoveryProps>`
+export const Discovery = styled(Card, { shouldForwardProp }) <DiscoveryProps>`
   border-radius: 16px;
   cursor: ${({ loading, error }) => (loading || !!error ? 'default' : 'pointer')};
 `;
@@ -46,7 +54,7 @@ interface ButtonCardProps {
   isLoading?: boolean;
 }
 
-export const ButtonCard = styled(Card) <ButtonCardProps>`
+export const ButtonCard = styled(Card, { shouldForwardProp }) <ButtonCardProps>`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -75,7 +83,7 @@ export const ButtonCard = styled(Card) <ButtonCardProps>`
   `}
 `
 
-export const Icon = styled(FontAwesomeIcon) <ButtonCardProps>`
+export const Icon = styled(FontAwesomeIcon, { shouldForwardProp }) <ButtonCardProps>`
   max-height: 44px;
   max-width: 44px;
   width: auto;

@@ -12,12 +12,12 @@ import Footer from '../../../shared/components/footer';
 import Header from '../../../shared/components/header';
 
 const HomeDesktop: FC = () => {
-  const { drawer } = useHome();
+  const { drawer, randomCocktail } = useHome();
   const { breakpoints } = useTheme();
   const isUpMd = useMediaQuery(breakpoints.up('md'));
 
   return (
-    <Root drawer={drawer}>
+    <Root drawer={drawer} thumb={randomCocktail.data?.thumb}>
       <Header />
 
       <Container maxWidth="lg">

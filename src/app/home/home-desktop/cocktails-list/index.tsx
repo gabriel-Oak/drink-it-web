@@ -9,7 +9,6 @@ const CocktailsList: FC = () => {
   const { cocktails } = useHome();
   const { breakpoints } = useTheme();
   const isDownSm = useMediaQuery(breakpoints.down('sm'));
-  console.log(cocktails);
 
   return cocktails.error ? (
     <ErrorCocktails variant='h4' color="text.secondary">

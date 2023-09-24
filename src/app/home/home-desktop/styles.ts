@@ -2,6 +2,7 @@ import { Fab, styled } from '@mui/material';
 
 interface RootProps {
   drawer: boolean;
+  thumb?: string;
 }
 
 export const Root = styled('main') <RootProps>`
@@ -10,6 +11,23 @@ export const Root = styled('main') <RootProps>`
     max-height: 100vh;
     overflow: hidden;
   `}
+
+  ${({ thumb }) => thumb && `
+    &::before {    
+      content: "";
+      background-image: url(${thumb});
+      background-size: cover;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      z-index: -1;
+      position: fixed;
+      height: 100vh;
+      width: 100vw;
+    }
+  `};
 `;
 
 interface SectionProps {
@@ -23,10 +41,3 @@ export const Section = styled('section') <SectionProps>`
   ${({ isUpMd }) => isUpMd ? 'column-gap: 16px;' : 'row-gap: 16px;'};
 `;
 
-export const Footer = styled('footer')`
-  margin-top: 32px;
-  background: white;
-  padding: 64px 24px;
-  display: flex;
-  column-gap: 44px;
-`;
