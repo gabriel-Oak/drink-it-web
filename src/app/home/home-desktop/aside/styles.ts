@@ -2,6 +2,7 @@ import { ApolloError } from "@apollo/client";
 import { Button, Card, CardContent, Typography, styled } from "@mui/material";
 import { themeConfigs } from "../../../../shared/theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 
 const shouldForwardProp = (prop: string) => ![
   'isActive',
@@ -109,4 +110,8 @@ export const FloatingButton = styled(Button)`
   bottom: 16px;
   left: 50%;
   transform: translateX(-50%);
+`;
+
+export const CocktailLink = styled(Link)`
+  display: contents;
 `;
