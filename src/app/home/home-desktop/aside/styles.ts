@@ -98,7 +98,7 @@ export const Label = styled(Typography)`
 
 export const FloatingButton = styled(Button)`
   position: fixed;
-  bottom: 20px;
+  bottom: 16px;
   left: 50%;
   transform: translateX(-50%);
 `;

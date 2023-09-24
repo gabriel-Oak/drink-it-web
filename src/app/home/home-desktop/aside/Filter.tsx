@@ -53,8 +53,8 @@ const Filter: FC = () => {
       </SectionHeader>
 
       <ButtonsContainer>
-        <FilterButton type="i" text="Alcoholic" icon={faMartiniGlassCitrus} />
-        <FilterButton type="i" text="Non Alcoholic" icon={faMartiniGlassEmpty} />
+        <FilterButton type="a" text="Alcoholic" icon={faMartiniGlassCitrus} />
+        <FilterButton type="a" text="Non Alcoholic" icon={faMartiniGlassEmpty} />
       </ButtonsContainer>
     </>
   );

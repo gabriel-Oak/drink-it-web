@@ -26,3 +26,7 @@ export const CardText = styled(Typography)`
   text-wrap: nowrap;
   overflow: hidden;
 `;
+
+export const ErrorCocktails = styled(Typography)`
+  flex: 1;
+`;
