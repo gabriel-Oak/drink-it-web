@@ -1,24 +1,12 @@
 import { ApolloResult } from '../../../shared/types/apollo';
+import { ShortCocktail } from '../../../shared/types/cocktail';
 
 export interface SearchType { [key: string]: string };
 
-export interface HomeCocktail {
-  id: string;
-  name: string;
-  thumb: string;
-  category: string;
-  measures: Array<{
-    measure: string;
-    ingredient: {
-      name: string;
-    };
-  }>;
-}
-
 export interface HomeContextProps {
   search: SearchType;
-  cocktails: ApolloResult<HomeCocktail[]>;
-  randomCocktail: ApolloResult<HomeCocktail>;
+  cocktails: ApolloResult<ShortCocktail[]>;
+  randomCocktail: ApolloResult<ShortCocktail>;
   drawer: boolean,
   setDrawer: (drawer: boolean) => void,
   getCocktails: (query: SearchType) => void;

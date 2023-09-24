@@ -1,10 +1,11 @@
 'use client';
 import { useQuery } from '@apollo/client';
-import { HomeCocktail, HomeContextProps, SearchType } from './types';
+import { HomeContextProps, SearchType } from './types';
 import { GET_COCKTAILS_QUERY, GET_RANDOM_QUERY } from './queries';
 import { useEffect, useState } from 'react';
-import useQueryParams from '../../../shared/hoks/use-query-params';
+import useQueryParams from '../../../shared/hooks/use-query-params';
 import { useMediaQuery, useTheme } from '@mui/material';
+import { ShortCocktail } from '../../../shared/types/cocktail';
 
 const useHomeController = (): HomeContextProps => {
   const { queryParams, setQueryParams } = useQueryParams<{
@@ -21,8 +22,8 @@ const useHomeController = (): HomeContextProps => {
 
   const { breakpoints } = useTheme();
   const isUpMd = useMediaQuery(breakpoints.up('md'));
-  const randomCocktail = useQuery<{ getRandomCocktail: HomeCocktail }>(GET_RANDOM_QUERY);
-  const cocktails = useQuery<{ getCocktails: HomeCocktail[] }>(GET_COCKTAILS_QUERY, {
+  const randomCocktail = useQuery<{ getRandomCocktail: ShortCocktail }>(GET_RANDOM_QUERY);
+  const cocktails = useQuery<{ getCocktails: ShortCocktail[] }>(GET_COCKTAILS_QUERY, {
     variables: { query: search }
   });
 

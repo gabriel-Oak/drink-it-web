@@ -1,5 +1,4 @@
-import { Card, Typography, styled } from '@mui/material';
-import Link from 'next/link';
+import { Typography, styled } from '@mui/material';
 
 export const Root = styled('article')`
   flex: 1;
@@ -16,22 +15,6 @@ export const Container = styled('section') <ContainerProps>`
   row-gap: 16px;
 `;
 
-export const Cocktail = styled(Card)`
-  border-radius: 16px;
-  cursor: pointer;
-`;
-
-export const CardText = styled(Typography)`
-  width: 100%;
-  text-overflow: ellipsis;
-  text-wrap: nowrap;
-  overflow: hidden;
-`;
-
 export const ErrorCocktails = styled(Typography)`
   flex: 1;
-`;
-
-export const CocktailLink = styled(Link)`
-  display: contents;
 `;

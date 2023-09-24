@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { CardText, Cocktail, CocktailLink } from './styles';
-import { HomeCocktail } from '../../context/types';
 import { CardContent, CardMedia, Tooltip } from '@mui/material';
+import { ShortCocktail } from '../../types/cocktail';
 
 export interface CocktailCardProps {
-  cocktail: HomeCocktail;
+  cocktail: ShortCocktail;
 }
 
 const CocktailCard: FC<CocktailCardProps> = ({ cocktail }) => {

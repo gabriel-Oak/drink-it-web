@@ -22,4 +22,4 @@ export const withHome = (Component: FC) => () => (
   <HomeProvider>
     <Component />
   </HomeProvider>
-)
+);

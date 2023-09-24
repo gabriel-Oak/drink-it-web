@@ -21,7 +21,7 @@ export const GET_COCKTAILS_QUERY = gql`
       }
     }
   }
-`
+`;
 
 export const GET_RANDOM_QUERY = gql`
   query Query {
@@ -38,4 +38,4 @@ export const GET_RANDOM_QUERY = gql`
       }
     }
   }
-`
+`;
