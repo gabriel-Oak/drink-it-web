@@ -8,3 +8,5 @@ const SearchPage: FC = () => {
     </Root>
   );
 }
+
+export default SearchPage;
