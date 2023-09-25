@@ -1,13 +1,18 @@
 import { FC } from 'react';
 import { useHome } from '../../context';
-import { CardContent, Typography } from '@mui/material';
-import { ButtonsContainer, SectionHeader } from './styles';
+import { CardContent, TextField, Typography } from '@mui/material';
+import { ButtonsContainer, Form, SectionHeader } from './styles';
 import FilterButton from './FilterButton';
 import { faBeerMugEmpty, faBlender, faBottleDroplet, faGlassWater, faLemon, faMartiniGlassCitrus, faMartiniGlassEmpty, faMugHot, faMugSaucer, faWhiskeyGlass, faWineBottle, faWineGlass, faWineGlassEmpty } from '@fortawesome/free-solid-svg-icons';
 import { faMixer } from '@fortawesome/free-brands-svg-icons';
 
 const Filter: FC = () => {
-  const { search, cocktails: { loading } } = useHome();
+  const {
+    cocktails: { loading },
+    searchIngredient,
+    setSearchIngredient,
+    onSubmitIngredient
+  } = useHome();
 
   return (
     <>
@@ -31,6 +36,18 @@ const Filter: FC = () => {
         <FilterButton type="i" text="Whiskey" icon={faWhiskeyGlass} />
         <FilterButton type="i" text="Lemon" icon={faLemon} />
       </ButtonsContainer>
+
+      <Form onSubmit={onSubmitIngredient}>
+        <TextField
+          label="Search another"
+          value={searchIngredient}
+          onChange={({ target }) => setSearchIngredient(target.value)}
+          size='small'
+          fullWidth
+          color='primary'
+          disabled={loading}
+        />
+      </Form>
 
       <SectionHeader variant="body2" fontWeight={500}>
         Category

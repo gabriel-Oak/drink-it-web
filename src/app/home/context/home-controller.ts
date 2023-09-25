@@ -2,7 +2,7 @@
 import { useQuery } from '@apollo/client';
 import { HomeContextProps, SearchType } from './types';
 import { GET_COCKTAILS_QUERY, GET_RANDOM_QUERY } from './queries';
-import { useEffect, useState } from 'react';
+import { FormEventHandler, useEffect, useState } from 'react';
 import useQueryParams from '../../../shared/hooks/use-query-params';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { ShortCocktail } from '../../../shared/types/cocktail';
@@ -10,10 +10,16 @@ import { ShortCocktail } from '../../../shared/types/cocktail';
 const useHomeController = (): HomeContextProps => {
   const { queryParams, setQueryParams } = useQueryParams<{
     type: string;
-    search: string
+    search: string;
+    customized: string;
   }>();
 
   const [drawer, setDrawer] = useState(false);
+  const [searchIngredient, setSearchIngredient] = useState(
+    queryParams.get('customized') === 'true'
+      ? queryParams.get('search') as string
+      : ''
+  );
   const [search, setSearch] = useState<SearchType>(
     (queryParams.get('type') && queryParams.get('search'))
       ? { [queryParams.get('type') as string]: queryParams.get('search') as string }
@@ -27,15 +33,23 @@ const useHomeController = (): HomeContextProps => {
     variables: { query: search }
   });
 
-  const getCocktails = (query: SearchType) => {
+  const getCocktails = (query: SearchType, preserveField?: boolean) => {
     setSearch(query);
     cocktails.fetchMore({ variables: { query } });
     setDrawer(false);
 
     setQueryParams({
       type: Object.keys(query)[0],
-      search: Object.values(query)[0]
+      search: Object.values(query)[0],
+      customized: preserveField ? String(!!searchIngredient) : 'false',
     });
+
+    if (!preserveField) setSearchIngredient('');
+  }
+
+  const onSubmitIngredient: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+    getCocktails({ i: searchIngredient }, true);
   }
 
   useEffect(() => {
@@ -55,8 +69,11 @@ const useHomeController = (): HomeContextProps => {
       error: randomCocktail.error
     },
     drawer,
+    searchIngredient,
+    setSearchIngredient,
     setDrawer,
-    getCocktails
+    getCocktails,
+    onSubmitIngredient
   };
 }
 

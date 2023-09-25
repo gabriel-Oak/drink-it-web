@@ -115,3 +115,7 @@ export const FloatingButton = styled(Button)`
 export const CocktailLink = styled(Link)`
   display: contents;
 `;
+
+export const Form = styled('form')`
+  padding: 0 16px 16px 16px;
+`;
