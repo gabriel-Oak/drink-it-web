@@ -3,7 +3,7 @@ import { useHome } from '../../context';
 import { CardContent, Typography } from '@mui/material';
 import { ButtonsContainer, SectionHeader } from './styles';
 import FilterButton from './FilterButton';
-import { faBeerMugEmpty, faBlender, faGlassWater, faLemon, faMartiniGlassCitrus, faMartiniGlassEmpty, faMugHot, faMugSaucer, faWhiskeyGlass, faWineBottle, faWineGlass, faWineGlassEmpty } from '@fortawesome/free-solid-svg-icons';
+import { faBeerMugEmpty, faBlender, faBottleDroplet, faGlassWater, faLemon, faMartiniGlassCitrus, faMartiniGlassEmpty, faMugHot, faMugSaucer, faWhiskeyGlass, faWineBottle, faWineGlass, faWineGlassEmpty } from '@fortawesome/free-solid-svg-icons';
 import { faMixer } from '@fortawesome/free-brands-svg-icons';
 
 const Filter: FC = () => {
@@ -23,6 +23,7 @@ const Filter: FC = () => {
 
       <ButtonsContainer>
         <FilterButton type="i" text="Vodka" icon={faMartiniGlassCitrus} />
+        <FilterButton type="i" text="Tequila" icon={faBottleDroplet} />
         <FilterButton type="i" text="Coffee" icon={faMugSaucer} />
         <FilterButton type="i" text="Gin" icon={faMartiniGlassEmpty} />
         <FilterButton type="i" text="Beer" icon={faBeerMugEmpty} />
@@ -42,8 +43,8 @@ const Filter: FC = () => {
         <FilterButton type="c" text="Cocoa" icon={faMugHot} />
         <FilterButton type="c" text="Shot" icon={faWhiskeyGlass} />
         <FilterButton type="c" text="Liqueur" icon={faWineBottle} />
-        <FilterButton type="c" text="Party Drink" icon={faMartiniGlassEmpty} />
-        <FilterButton type="c" text="Coffe / Tea" icon={faMugSaucer} />
+        <FilterButton type="c" text="Homemade Liqueur" icon={faBottleDroplet} />
+        <FilterButton type="c" text="Coffee / Tea" icon={faMugSaucer} />
         <FilterButton type="c" text="Beer" icon={faBeerMugEmpty} />
         <FilterButton type="c" text="Soft Drink" icon={faWineGlassEmpty} />
       </ButtonsContainer>

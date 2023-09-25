@@ -1,25 +1,31 @@
 import { Fab, styled } from '@mui/material';
 import RootDesktop from '../../../shared/components/root-desktop';
+import theme from '../../../shared/theme';
+
+const shouldForwardProp = (prop: string) => ![
+  'drawer'
+].includes(prop);
 
 interface RootProps {
   drawer: boolean;
 }
 
-export const Root = styled(RootDesktop) <RootProps>`
+export const Root = styled(RootDesktop, { shouldForwardProp }) <RootProps>`
   ${({ drawer }) => drawer && `
     max-height: 100vh;
     overflow: hidden;
   `}
 `;
 
-interface SectionProps {
-  isUpMd: boolean;
-}
-
-export const Section = styled('section') <SectionProps>`
+export const Section = styled('section')`
   margin: auto;
   display: flex;
-  flex-direction: ${({ isUpMd }) => isUpMd ? 'row' : 'column'};
-  ${({ isUpMd }) => isUpMd ? 'column-gap: 16px;' : 'row-gap: 16px;'};
+  flex-direction: column;
+  row-gap: 16px;
+  column-gap: 16px;
+
+  ${theme.breakpoints.up('md')} {
+    flex-direction: row;
+  }
 `;
 

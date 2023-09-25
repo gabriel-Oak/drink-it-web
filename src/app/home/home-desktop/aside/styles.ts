@@ -1,6 +1,6 @@
 import { ApolloError } from "@apollo/client";
 import { Button, Card, CardContent, Typography, styled } from "@mui/material";
-import { themeConfigs } from "../../../../shared/theme";
+import theme, { themeConfigs } from "../../../../shared/theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
@@ -12,16 +12,16 @@ const shouldForwardProp = (prop: string) => ![
   'error'
 ].includes(prop)
 
-interface RootProps {
-  isUpMd: boolean;
-}
 
-export const Root = styled('aside', { shouldForwardProp }) <RootProps>`
+export const Root = styled('aside')`
   flex: 1;
   row-gap: 16px;
-  ${({ isUpMd }) => isUpMd && 'max-width: 290px;'}
   display: flex;
   flex-direction: column;
+
+  ${theme.breakpoints.up('md')} {
+    max-width: 290px;
+  }
 `;
 
 interface DiscoveryProps {

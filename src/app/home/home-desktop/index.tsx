@@ -1,6 +1,6 @@
 'use client';
 import {
-  Container, useMediaQuery, useTheme
+  Container
 } from '@mui/material';
 import { FC } from 'react';
 import { Root, Section } from './styles';
@@ -13,15 +13,13 @@ import Header from '../../../shared/components/header';
 
 const HomeDesktop: FC = () => {
   const { drawer, randomCocktail } = useHome();
-  const { breakpoints } = useTheme();
-  const isUpMd = useMediaQuery(breakpoints.up('md'));
 
   return (
     <Root drawer={drawer} thumb={randomCocktail.data?.thumb}>
       <Header />
 
       <Container maxWidth="lg">
-        <Section isUpMd={isUpMd}>
+        <Section>
           <Aside />
 
           <CocktailsList />

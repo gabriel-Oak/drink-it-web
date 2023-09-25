@@ -48,7 +48,7 @@ const DiscoveryCard: FC = () => {
             <Typography variant="body2" color="text.secondary">
               {error
                 ? getApolloError(error)
-                : `${data?.measures[0].ingredient.name} - ${data?.category}`}
+                : `${data?.measures[0]?.ingredient.name} - ${data?.category}`}
             </Typography>
           )}
         </CardContent>
