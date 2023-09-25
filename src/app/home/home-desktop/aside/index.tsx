@@ -12,7 +12,7 @@ const Aside: FC = () => {
   const isUpMd = useMediaQuery(breakpoints.up('md'));
 
   return (
-    <Root isUpMd={isUpMd}>
+    <Root>
       <DiscoveryCard />
 
       {isUpMd ? (
