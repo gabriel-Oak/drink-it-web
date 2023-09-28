@@ -1,27 +1,35 @@
-import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, IconButton, Typography } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { FC } from 'react';
-import { IconBack } from './styles';
+import { IconBack, ItemsContainer, StyledToolbar } from './styles';
+import Search from './search';
 
 const Header: FC = () => {
   const { back } = useRouter();
 
   return (
     <AppBar>
-      <Toolbar>
-        {global.history.length > 1 && (
-          <Box mr={2}>
-            <IconButton onClick={back}>
-              <IconBack />
-            </IconButton>
-          </Box>
-        )}
+      <StyledToolbar>
+        <Box display="flex" alignItems="center">
+          {global.history.length > 1 && (
+            <Box mr={2}>
+              <IconButton onClick={back}>
+                <IconBack />
+              </IconButton>
+            </Box>
+          )}
 
+          <Typography variant="h6" component="div">
+            Drink.it
+          </Typography>
+        </Box>
 
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Drink.it
-        </Typography>
-      </Toolbar>
+        <ItemsContainer >
+          <Search />
+
+          <div />
+        </ItemsContainer>
+      </StyledToolbar>
     </AppBar>
   );
 }

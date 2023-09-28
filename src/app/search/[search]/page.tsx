@@ -1,12 +1,16 @@
 'use client';
 import { FC } from 'react';
-import { Root } from './styles';
+import Header from '../../../shared/components/header';
+import RootDesktop from '../../../shared/components/root-desktop';
+import CocktailList from './cocktail-list';
 
 const SearchPage: FC = () => {
   return (
-    <Root>
-      olá
-    </Root>
+    <RootDesktop>
+      <Header />
+
+      <CocktailList />
+    </RootDesktop>
   );
 }
 

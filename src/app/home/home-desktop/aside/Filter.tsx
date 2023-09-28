@@ -63,6 +63,7 @@ const Filter: FC = () => {
         <FilterButton type="c" text="Homemade Liqueur" icon={faBottleDroplet} />
         <FilterButton type="c" text="Coffee / Tea" icon={faMugSaucer} />
         <FilterButton type="c" text="Beer" icon={faBeerMugEmpty} />
+        <FilterButton type="c" text="Punch / Party Drink" icon={faMartiniGlassCitrus} />
         <FilterButton type="c" text="Soft Drink" icon={faWineGlassEmpty} />
       </ButtonsContainer>
 
