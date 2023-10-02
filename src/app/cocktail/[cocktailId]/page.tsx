@@ -16,7 +16,8 @@ const CocktailPage: FC = () => {
   const { cocktail } = useCocktail();
   const paths = [
     { title: 'Drink.it', href: '/' },
-    { title: cocktail.data?.name || 'Cocktail' }
+    { title: 'Cocktail' },
+    { title: cocktail.data?.name || '' }
   ];
 
   return (

@@ -1,12 +1,17 @@
 import { styled } from '@mui/material';
+import theme from '../theme';
 
 interface RootDesktopProps {
   thumb?: string;
 }
 
 const RootDesktop = styled('main') <RootDesktopProps>`
-  padding-top: 96px;
+  padding-top: 86px;
   min-height: 100vh;
+
+  ${theme.breakpoints.down('sm')} {
+    padding-top: 112px;
+  }
 
   ${({ thumb }) => thumb && `
     &::before {    

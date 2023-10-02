@@ -11,7 +11,7 @@ const Header: FC = () => {
     <AppBar>
       <StyledToolbar>
         <Box display="flex" alignItems="center">
-          {global.history.length > 1 && (
+          {global.history?.length > 1 && (
             <Box mr={2}>
               <IconButton onClick={back}>
                 <IconBack />
