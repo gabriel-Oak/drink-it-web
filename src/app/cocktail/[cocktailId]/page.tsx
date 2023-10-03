@@ -11,13 +11,15 @@ import { Content } from './styles';
 import UpButton from '../../../shared/components/up-button';
 import RelatedDrinks from './related-drinks';
 import Breadcrumbs from '../../../shared/components/breadcrumbs';
+import { useParams } from 'next/navigation';
 
 const CocktailPage: FC = () => {
+  const { cocktailId } = useParams<{ cocktailId: string }>();
   const { cocktail } = useCocktail();
   const paths = [
     { title: 'Drink.it', href: '/' },
     { title: 'Cocktail' },
-    { title: cocktail.data?.name || '' }
+    { title: cocktail.data?.name || cocktailId }
   ];
 
   return (
