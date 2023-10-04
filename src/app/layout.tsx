@@ -5,7 +5,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import ThemeRegistry from './theme-registry';
+import Registry from './registry';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,11 +22,11 @@ const RootLayout = ({
 }) => {
   return (
     <html lang="en">
-      <ThemeRegistry options={{ key: 'mui' }}>
+      <Registry options={{ key: 'mui' }}>
         <body className={inter.className}>
           {children}
         </body>
-      </ThemeRegistry>
+      </Registry>
     </html>
   )
 }

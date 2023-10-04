@@ -7,8 +7,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { FC, useState } from 'react';
 import theme from '../shared/theme';
 import ApolloProvider from './apollo-provider';
+import { AuthProvider } from '../shared/contexts/auth';
 
-const ThemeRegistry: FC<{
+const Registry: FC<{
   options: {
     key: string;
     prepend?: boolean;
@@ -64,11 +65,13 @@ const ThemeRegistry: FC<{
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <ApolloProvider>
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </ApolloProvider>
       </ThemeProvider>
     </CacheProvider>
   );
 }
 
-export default ThemeRegistry;
+export default Registry;

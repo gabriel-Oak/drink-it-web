@@ -1,6 +1,5 @@
-import { type } from "os";
 import { ApolloResult } from "../../types/apollo";
-import { ApolloQueryResult } from "@apollo/client";
+import { ApolloQueryResult, FetchResult } from "@apollo/client";
 
 export interface User {
   id: string;
@@ -26,8 +25,8 @@ export interface AuthContextProps {
   signIn: (payload: LogInUser) => Promise<ApolloQueryResult<{
     authenticateUser: AuthUser;
   }>>;
-  signUp: (payload: CreateUser) => Promise<ApolloQueryResult<{
+  signUp: (variables: CreateUser) => Promise<FetchResult<{
     createUser: AuthUser;
-  }>>;
+  }>>
   signOut: () => void;
 }
