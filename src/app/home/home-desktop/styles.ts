@@ -1,4 +1,4 @@
-import { Fab, styled } from '@mui/material';
+import { styled } from '@mui/material';
 import RootDesktop from '../../../shared/components/root-desktop';
 import theme from '../../../shared/theme';
 

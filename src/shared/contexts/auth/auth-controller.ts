@@ -1,11 +1,14 @@
 'use client';
-import { useMutation, useQuery } from '@apollo/client';
+import { ApolloError, useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import { AUTH_USER_QUERY, CREATE_USER_MUTATION, REFRESH_TOKEN_QUERY } from './queries';
 import { AuthContextProps, AuthUser, CreateUser, LogInUser, User } from './types';
 import { useEffect, useMemo, useState } from 'react';
 import { APP_KEY } from '../../types/app';
 
 const useAuthController = (): AuthContextProps => {
+  const [singInDialog, setSingInDialog] = useState(false);
+  const [singUpDialog, setSingUpDialog] = useState(false);
+
   const storageAuth = useMemo(() => global.localStorage?.getItem(`${APP_KEY}/auth`), []);
   const storageUser = useMemo(() => {
     const user = global.sessionStorage?.getItem(`${APP_KEY}/user`);
@@ -16,9 +19,12 @@ const useAuthController = (): AuthContextProps => {
     createUser: AuthUser;
   }>(CREATE_USER_MUTATION);
 
-  const authUser = useQuery<{
+  const [executeAuthUser, authUser] = useLazyQuery<{
     authenticateUser: AuthUser;
-  }>(AUTH_USER_QUERY, { skip: true });
+  }>(AUTH_USER_QUERY, {
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'cache-and-network'
+  });
 
   const refreshToken = useQuery<{
     refreshUserToken: AuthUser;
@@ -31,14 +37,17 @@ const useAuthController = (): AuthContextProps => {
 
   const [auth, setAuth] = useState(storageAuth);
   const [user, setUser] = useState(storageUser);
+  const [error, setError] = useState<ApolloError | undefined>();
+
+  useEffect(() => {
+    setError(
+      authUser.error || refreshToken.error || createUser.error
+    );
+  }, [authUser.error, refreshToken.error, createUser.error])
 
   const loading = authUser.loading
     || refreshToken.loading
     || createUser.loading;
-
-  const error = authUser.error
-    || refreshToken.error
-    || createUser.error;
 
   useEffect(() => {
     const newAuth = refreshToken.data?.refreshUserToken.auth
@@ -57,6 +66,11 @@ const useAuthController = (): AuthContextProps => {
     if (newUser && newUser !== storageUser)
       sessionStorage.setItem(`${APP_KEY}/user`, JSON.stringify(newUser));
 
+    if (newAuth && newUser) {
+      setSingInDialog(false);
+      setSingUpDialog(false);
+    }
+
     setAuth(newAuth);
     setUser(newUser);
   }, [
@@ -67,7 +81,11 @@ const useAuthController = (): AuthContextProps => {
     storageUser
   ]);
 
-  const signIn = (payload: LogInUser) => authUser.refetch(payload);
+  const signIn = (variables: LogInUser) => {
+    if (authUser.error || authUser.data) authUser.refetch(variables)
+    else executeAuthUser({ variables });
+  }
+
   const signUp = (variables: CreateUser) => registerUser({ variables });
   const signOut = () => {
     localStorage.removeItem(`${APP_KEY}/auth`);
@@ -83,9 +101,20 @@ const useAuthController = (): AuthContextProps => {
       error
     },
     auth,
+    singInDialog,
+    singUpDialog,
     signIn,
     signUp,
     signOut,
+    setError,
+    setSingInDialog: (value: boolean) => {
+      setSingInDialog(value);
+      setSingUpDialog(false);
+    },
+    setSingUpDialog: (value: boolean) => {
+      setSingUpDialog(value);
+      setSingInDialog(false);
+    },
   };
 }
 

@@ -1,5 +1,5 @@
 import { ArrowBack } from '@mui/icons-material';
-import { IconButton, OutlinedInput, TextField, Toolbar, styled } from '@mui/material';
+import { AppBar, Avatar, IconButton, OutlinedInput, TextField, Toolbar, styled } from '@mui/material';
 import theme from '../../theme';
 
 export const IconBack = styled(ArrowBack)`
@@ -29,6 +29,10 @@ export const StyledIconButton = styled(IconButton)`
   color: white;
 `;
 
+export const StyledAppBar = styled(AppBar)`
+  padding: 0 !important;
+`;
+
 export const StyledToolbar = styled(Toolbar)`
   column-gap: 16px;
 
@@ -46,4 +50,8 @@ export const ItemsContainer = styled('div')`
   ${theme.breakpoints.only('xs')} {
     width: 100%;
   }
+`;
+
+export const StyledAvatar = styled(Avatar)`
+  cursor: pointer;
 `;

@@ -1,5 +1,5 @@
 import { ApolloResult } from "../../types/apollo";
-import { ApolloQueryResult, FetchResult } from "@apollo/client";
+import { ApolloError, ApolloQueryResult, FetchResult } from "@apollo/client";
 
 export interface User {
   id: string;
@@ -22,11 +22,14 @@ export interface AuthUser {
 export interface AuthContextProps {
   user: ApolloResult<User>;
   auth: string | null;
-  signIn: (payload: LogInUser) => Promise<ApolloQueryResult<{
-    authenticateUser: AuthUser;
-  }>>;
+  singInDialog: boolean;
+  singUpDialog: boolean;
+  setSingInDialog: (value: boolean) => void;
+  setSingUpDialog: (value: boolean) => void;
+  signIn: (variables: LogInUser) => void;
   signUp: (variables: CreateUser) => Promise<FetchResult<{
     createUser: AuthUser;
   }>>
   signOut: () => void;
+  setError: (value: ApolloError | undefined) => void;
 }

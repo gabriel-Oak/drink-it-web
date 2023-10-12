@@ -12,4 +12,5 @@ body {
   overflow-x: hidden;
   background-color: var(--grey-300) !important;
   scroll-behavior: smooth;
+  padding: 0 !important;
 }
