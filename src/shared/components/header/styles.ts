@@ -1,6 +1,10 @@
 import { ArrowBack } from '@mui/icons-material';
-import { AppBar, Avatar, IconButton, OutlinedInput, TextField, Toolbar, styled } from '@mui/material';
+import { AppBar, Avatar, CircularProgress, IconButton, OutlinedInput, TextField, Toolbar, styled } from '@mui/material';
 import theme from '../../theme';
+
+const shouldForwardProp = (prop: string) => ![
+  'isLoading'
+].includes(prop);
 
 export const IconBack = styled(ArrowBack)`
   color: white;
@@ -52,6 +56,15 @@ export const ItemsContainer = styled('div')`
   }
 `;
 
-export const StyledAvatar = styled(Avatar)`
-  cursor: pointer;
+interface StyledAvatarProps { isLoading: boolean }
+
+export const StyledAvatar = styled(Avatar, { shouldForwardProp }) <StyledAvatarProps>`
+  cursor: ${({ isLoading }) => isLoading ? 'default' : 'pointer'};
+  position: relative;
+`;
+
+export const StyeldCircularProgress = styled(CircularProgress)`
+  position: absolute;
+  top: 0;
+  left: 0;
 `;

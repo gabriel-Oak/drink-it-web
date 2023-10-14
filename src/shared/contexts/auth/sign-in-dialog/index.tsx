@@ -1,11 +1,11 @@
 import { Button, Dialog, DialogActions, DialogTitle, LinearProgress } from '@mui/material';
 import { FC } from 'react';
-import { useAuth } from '../../contexts/auth';
+import { useAuth } from '..';
 import { useForm } from 'react-hook-form';
-import { LogInUser } from '../../contexts/auth/types';
-import FormInputText from '../form-text-input';
+import { LogInUser } from '../types';
+import FormInputText from '../../../components/form-text-input';
 import { Form, StyledDialogContent } from './styles';
-import validateEmail from '../../utils/validations/validate-email';
+import validateEmail from '../../../utils/validations/validate-email';
 
 
 const SingInDialog: FC = () => {

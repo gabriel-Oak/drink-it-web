@@ -11,61 +11,71 @@ const FormInputText: FC<{
   type?: string;
   disabled?: boolean;
   rules?: Omit<RegisterOptions<any, string>, "disabled" | "valueAsNumber" | "valueAsDate" | "setValueAs">;
-}> = ({ name, control, label, type, disabled, rules }) => {
-  const [showPass, setShowPass] = useState(false);
+  autoComplete?: string
+}> = ({
+  name,
+  control,
+  label,
+  type,
+  disabled,
+  rules,
+  autoComplete
+}) => {
+    const [showPass, setShowPass] = useState(false);
 
-  return (
-    <Controller
-      name={name}
-      control={control}
-      disabled={disabled}
-      rules={rules}
-      render={({
-        field,
-        fieldState: { error },
-      }) => (
-        <FormControl
-          fullWidth
-          variant="outlined"
-          disabled={disabled}
-          required={!!rules?.required}
-          error={!!error}
-        >
-          <InputLabel htmlFor={name}>{label}</InputLabel>
-          <OutlinedInput
-            id={name}
-            disabled={disabled}
-            type={type !== 'password'
-              ? (type || 'text')
-              : (showPass ? 'text' : 'password')}
-            {...field}
-            value={field.value || ''}
+    return (
+      <Controller
+        name={name}
+        control={control}
+        disabled={disabled}
+        rules={rules}
+        render={({
+          field,
+          fieldState: { error },
+        }) => (
+          <FormControl
             fullWidth
-            label={label}
-            endAdornment={type && (
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={() => setShowPass(!showPass)}
-                  edge="end"
-                >
-                  {showPass ? (
-                    <VisibilityOff color={error && 'error'} />
-                  ) : (
-                    <Visibility color={error && 'error'} />
-                  )}
-                </IconButton>
-              </InputAdornment>
+            variant="outlined"
+            disabled={disabled}
+            required={!!rules?.required}
+            error={!!error}
+          >
+            <InputLabel htmlFor={name}>{label}</InputLabel>
+            <OutlinedInput
+              id={name}
+              disabled={disabled}
+              type={type !== 'password'
+                ? (type || 'text')
+                : (showPass ? 'text' : 'password')}
+              {...field}
+              value={field.value || ''}
+              fullWidth
+              label={label}
+              autoComplete={autoComplete}
+              endAdornment={type && (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPass(!showPass)}
+                    edge="end"
+                  >
+                    {showPass ? (
+                      <VisibilityOff color={error && 'error'} />
+                    ) : (
+                      <Visibility color={error && 'error'} />
+                    )}
+                  </IconButton>
+                </InputAdornment>
+              )}
+            />
+            {error?.message && (
+              <FormHelperText error>
+                {error.message}
+              </FormHelperText>
             )}
-          />
-          {error?.message && (
-            <FormHelperText error>
-              {error.message}
-            </FormHelperText>
-          )}
-        </FormControl>
-      )}
-    />
-  );
-}
+          </FormControl>
+        )}
+      />
+    );
+  }
 export default FormInputText

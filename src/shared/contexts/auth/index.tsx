@@ -2,8 +2,9 @@
 import { FC, createContext, useContext } from 'react';
 import { AuthContextProps } from './types';
 import useAuthController from './auth-controller';
-import SingInDialog from '../../components/sign-in-dialog';
 import { Alert, Snackbar } from '@mui/material';
+import SingUpDialog from './sign-up-dialog';
+import SingInDialog from './sign-in-dialog';
 
 export const AuthContext = createContext({} as AuthContextProps);
 
@@ -15,9 +16,11 @@ export const AuthProvider: FC<{ children: JSX.Element }> = ({ children }) => {
       {children}
 
       <SingInDialog />
+      <SingUpDialog />
+
       <Snackbar
         open={!!controller.user.error}
-        autoHideDuration={6000}
+        autoHideDuration={12000}
         onClose={() => controller.setError(undefined)}
       >
         <Alert

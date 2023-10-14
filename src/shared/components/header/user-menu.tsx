@@ -3,8 +3,10 @@
 import { FC, useState } from 'react'
 import { useAuth } from '../../contexts/auth';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Menu, MenuItem } from '@mui/material';
-import { StyledAvatar } from './styles';
+import { ListItemIcon, ListItemText, Menu, MenuItem } from '@mui/material';
+import { StyeldCircularProgress, StyledAvatar } from './styles';
+import LogoutIcon from '@mui/icons-material/Logout';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const UserMenu: FC = () => {
   const { user, auth, setSingInDialog, setSingUpDialog, signOut } = useAuth();
@@ -27,11 +29,14 @@ const UserMenu: FC = () => {
   return (
     <div>
       <StyledAvatar
+        isLoading={user.loading}
         onClick={({ currentTarget }) => setAnchor(currentTarget)}
       >
         {user.data && auth ? user.data.name.slice(0, 2).toUpperCase() : (
           <AccountCircleIcon />
         )}
+
+        {user.loading && <StyeldCircularProgress color="secondary" />}
       </StyledAvatar>
 
       <Menu
@@ -42,9 +47,26 @@ const UserMenu: FC = () => {
       >
         {user.data && auth ? (
           <div>
-            <MenuItem onClick={handleSignOut}>Favorites</MenuItem>
-            <MenuItem onClick={handleSignOut}>Profile</MenuItem>
-            <MenuItem onClick={handleSignOut}>Logout</MenuItem>
+            <MenuItem onClick={handleSignOut}>
+              <ListItemIcon>
+                <FavoriteBorderIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Favorites</ListItemText>
+            </MenuItem>
+
+            <MenuItem onClick={handleSignOut}>
+              <ListItemIcon>
+                <AccountCircleIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Profile</ListItemText>
+            </MenuItem>
+
+            <MenuItem onClick={handleSignOut}>
+              <ListItemIcon>
+                <LogoutIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText>Log out</ListItemText>
+            </MenuItem>
           </div>
         ) : (
           <div>
@@ -52,8 +74,8 @@ const UserMenu: FC = () => {
             <MenuItem onClick={handleSignUp}>Sign Up</MenuItem>
           </div>
         )}
-      </Menu>
-    </div>
+      </Menu >
+    </div >
   );
 }
 

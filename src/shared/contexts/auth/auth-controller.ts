@@ -17,7 +17,9 @@ const useAuthController = (): AuthContextProps => {
 
   const [registerUser, createUser] = useMutation<{
     createUser: AuthUser;
-  }>(CREATE_USER_MUTATION);
+  }>(CREATE_USER_MUTATION, {
+    notifyOnNetworkStatusChange: true,
+  });
 
   const [executeAuthUser, authUser] = useLazyQuery<{
     authenticateUser: AuthUser;
@@ -26,18 +28,26 @@ const useAuthController = (): AuthContextProps => {
     fetchPolicy: 'cache-and-network'
   });
 
-  const refreshToken = useQuery<{
+  const [executeRefreshToken, refreshToken] = useLazyQuery<{
     refreshUserToken: AuthUser;
   }>(REFRESH_TOKEN_QUERY, {
-    skip: !storageAuth,
-    context: {
-      headers: { Authorization: storageAuth }
-    }
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'cache-and-network',
   });
 
   const [auth, setAuth] = useState(storageAuth);
-  const [user, setUser] = useState(storageUser);
+  const [user, setUser] = useState<User | undefined>(undefined);
   const [error, setError] = useState<ApolloError | undefined>();
+
+  useEffect(() => {
+    setUser(storageUser);
+    if (storageAuth) executeRefreshToken({
+      context: {
+        headers: { Authorization: storageAuth }
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     setError(
@@ -86,7 +96,7 @@ const useAuthController = (): AuthContextProps => {
     else executeAuthUser({ variables });
   }
 
-  const signUp = (variables: CreateUser) => registerUser({ variables });
+  const signUp = (newUser: CreateUser) => registerUser({ variables: { newUser } });
   const signOut = () => {
     localStorage.removeItem(`${APP_KEY}/auth`);
     sessionStorage.removeItem(`${APP_KEY}/user`);
