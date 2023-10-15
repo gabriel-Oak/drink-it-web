@@ -11,7 +11,7 @@ import validatePassword from '../../../utils/validations/validate-password';
 
 const SingUpDialog: FC = () => {
   const { singUpDialog, setSingInDialog, setSingUpDialog, signUp, user } = useAuth();
-  const { handleSubmit, control, reset, watch } = useForm<CreateUser>();
+  const { handleSubmit, control, watch } = useForm<CreateUser>();
 
   const onSingIn = (values: CreateUser & { 'confirm-password'?: string }) => {
     delete values['confirm-password']
@@ -60,19 +60,6 @@ const SingUpDialog: FC = () => {
                 value: true
               },
               validate: validateEmail,
-            }}
-          />
-
-          <FormInputText
-            name="username"
-            label="User Name"
-            control={control}
-            disabled={user.loading}
-            rules={{
-              required: {
-                message: 'Please inform a user name',
-                value: true
-              },
             }}
           />
 
