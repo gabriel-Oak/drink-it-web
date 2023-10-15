@@ -8,7 +8,6 @@ export const AUTH_USER_QUERY = gql`
         id
         name
         email
-        username
       }
     }
   }
@@ -22,7 +21,6 @@ export const REFRESH_TOKEN_QUERY = gql`
         id
         name
         email
-        username
       }
     }
   }
@@ -36,7 +34,6 @@ export const CREATE_USER_MUTATION = gql`
         id,
         name,
         email,
-        username
       }
     }
 }
