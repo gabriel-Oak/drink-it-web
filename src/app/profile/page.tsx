@@ -1,3 +1,4 @@
+'use client';
 import { FC } from 'react';
 import RootDesktop from '../../shared/components/root-desktop';
 import { ProfileProvider } from './context';
