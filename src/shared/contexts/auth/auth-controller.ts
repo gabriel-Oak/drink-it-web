@@ -53,6 +53,8 @@ const useAuthController = (): AuthContextProps => {
     setError(
       authUser.error || refreshToken.error || createUser.error
     );
+    localStorage.removeItem(`${APP_KEY}/auth`);
+    sessionStorage.removeItem(`${APP_KEY}/user`);
   }, [authUser.error, refreshToken.error, createUser.error])
 
   const loading = authUser.loading
